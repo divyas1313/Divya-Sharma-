@@ -6,7 +6,33 @@ document.addEventListener('DOMContentLoaded', function () {
   for (const link of links) {
     link.addEventListener('click', smoothScroll);
   }
+// Hamburger Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const headerNav = document.querySelector('.header-nav');
 
+if (hamburger && headerNav) {
+  hamburger.addEventListener('click', function () {
+    hamburger.classList.toggle('active');
+    headerNav.classList.toggle('active');
+    
+    // Optional: Close nav when clicking outside (for better mobile UX)
+    document.addEventListener('click', function closeNavOnOutsideClick(event) {
+      if (!headerNav.contains(event.target) && !hamburger.contains(event.target)) {
+        hamburger.classList.remove('active');
+        headerNav.classList.remove('active');
+      }
+    });
+  });
+  
+  // Close nav when a link is clicked (smooth scroll to section)
+  const navLinks = headerNav.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      hamburger.classList.remove('active');
+      headerNav.classList.remove('active');
+    });
+  });
+}
   function smoothScroll(event) {
     event.preventDefault();
     const targetId = this.getAttribute('href').substring(1);
@@ -450,4 +476,5 @@ document.addEventListener('DOMContentLoaded', function () {
 // ...existing code...
 
 });
+
 
