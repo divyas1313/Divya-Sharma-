@@ -41,6 +41,33 @@ header nav a:hover,
 header nav a.active {
   color: var(--accent-color);
 }
+// Hamburger Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const headerNav = document.querySelector('.header-nav');
+
+if (hamburger && headerNav) {
+  hamburger.addEventListener('click', function () {
+    hamburger.classList.toggle('active');
+    headerNav.classList.toggle('active');
+    
+    // Optional: Close nav when clicking outside (for better mobile UX)
+    document.addEventListener('click', function closeNavOnOutsideClick(event) {
+      if (!headerNav.contains(event.target) && !hamburger.contains(event.target)) {
+        hamburger.classList.remove('active');
+        headerNav.classList.remove('active');
+      }
+    });
+  });
+  
+  // Close nav when a link is clicked (smooth scroll to section)
+  const navLinks = headerNav.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      hamburger.classList.remove('active');
+      headerNav.classList.remove('active');
+    });
+  });
+}
 
 .header-nav ul {
   display: flex;
@@ -1308,3 +1335,4 @@ footer {
     font-size: 2.5rem;
   }
 }
+
