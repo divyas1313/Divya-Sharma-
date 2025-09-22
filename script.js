@@ -57,7 +57,52 @@ document.addEventListener('DOMContentLoaded', function () {
     skillObserver.observe(skillsSection);
   }
 
+  
   // Gallery Carousel functionality - Faster transitions
+  document.addEventListener('DOMContentLoaded', function () {
+  // ... other code ...
+
+  // Soft Skills Carousel code here
+  // Technical Skills Carousel code here
+
+  // Gallery Carousel functionality - Faster transitions
+  const carouselTrack = document.querySelector('.carousel-track');
+  const carouselSlides = document.querySelectorAll('.carousel-slide');
+  const leftBtn = document.getElementById('carousel-left');
+  const rightBtn = document.getElementById('carousel-right');
+
+  let currentIndex = 0;
+  const totalSlides = carouselSlides.length;
+  const slidesToShow = 3; // Default for desktop
+  const maxIndex = Math.ceil(totalSlides / slidesToShow) - 1;
+
+  function updateCarousel() {
+    const translateX = -currentIndex * 100;
+    carouselTrack.style.transform = `translateX(${translateX}%)`;
+    leftBtn.disabled = currentIndex === 0;
+    rightBtn.disabled = currentIndex === maxIndex;
+  }
+
+  rightBtn.addEventListener('click', function () {
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+
+  leftBtn.addEventListener('click', function () {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+
+  // Initial setup
+  updateCarousel();
+
+  // ... other code ...
+});
+
   const carouselTrack = document.querySelector('.carousel-track');
   const carouselSlides = document.querySelectorAll('.carousel-slide');
   const leftBtn = document.getElementById('carousel-left');
@@ -360,4 +405,5 @@ setupCarousel('soft-skills-track', 'soft-skills-left', 'soft-skills-right');
 setupCarousel('gallery-track', 'carousel-left', 'carousel-right');
 
 // ...existing code...
+
 });
